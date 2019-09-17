@@ -1,0 +1,23 @@
+/* Buttons */
+
+.btn {
+    font-size: 10px;
+    padding: 8px;
+}
+
+#btn-add {
+    width: 16%;
+    text-align: center;
+}
+
+#btn-delete-all,
+#btn-delete-completed {
+    display: grid;
+}
+
+.todo-group input {
+    padding: 8px;
+    width: 85%;
+    border-radius: 5px;
+    border: 1px solid #D7DBDD;
+}

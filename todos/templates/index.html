@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" media="screen and (max-width: 375px)" href="{% static 'css/mobile.css' %}">
+    <title>Todo Application</title>
+</head>
+<body>
+    <div id="container">
+        <div class="todo-wrap">
+            <h3>What's Your Task?</h3>
+            <form action="{% url 'add' %}" method="POST">
+                {% csrf_token %}
+                <div class="todo-group">
+                    <div class="todo-flex">
+                        {{form.text}}
+                    <button type="submit" class="btn" id="btn-add">Add</button>
+                    </div>
+                </div>
+            </form>
+            <div class="todo-group">
+                <a href="{% url 'deletecomplete' %}"><button class="btn" id="btn-delete-completed">Delete Completed</button></a>
+            </div>
+            <div class="todo-group">
+                <a href="{% url 'deleteall' %}"><button class="btn" id="btn-delete-all">Delete All</button></a>
+            </div>
+            <div class="todo-group">
+                <ul>
+                    {% for todo in todos %}
+                        {% if todo.is_complete %}
+                        <li id="list-complete">{{todo.text}}</li>
+                        {% else %}
+                        <li><a href="{% url 'complete' todo.id %}">{{ todo.text }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p id="footer">Copyright &copy; 2019. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
